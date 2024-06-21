@@ -1,6 +1,7 @@
 const express= require("express");
 const app = express();
 const Router=require('./router/router-auth');
+const connectdb=require('./utils/db')
 app.use(express.json())
 app.use('/api/auth',Router);
 
@@ -24,7 +25,9 @@ app.get('/register',(req,res)=>{
 
 
 const PORT=5000;
+connectdb().then(()=>{
 app.listen(PORT,()=>{
     console.log(`server is running on port ${PORT}`);
 
-})
+});
+});
